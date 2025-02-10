@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Arm Limited. All rights reserved.
+ * Copyright (c) 2019-2025 Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -35,8 +35,8 @@
 #define TCP_REJECTED_PORT   5001        // Rejected connection server TCP port
 #define TCP_TIMEOUT_PORT    5002        // Non-responding server TCP port
 
-#define GET_SYSTICK()       osKernelGetSysTimerCount()
-#define SYSTICK_MSEC(ms)    ((uint64_t)ms * osKernelGetSysTimerFreq() / 1000)
+#define GET_SYSTICK()   	osKernelGetTickCount()
+#define SYSTICK_MS(ms)  	(((uint32_t)ms * osKernelGetTickFreq()) / 1000U)
 
 // Socket Server threads
 extern void DgramServer (void *argument);

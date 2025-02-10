@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2020 Arm Limited. All rights reserved.
+ * Copyright (c) 2019-2025 Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -384,7 +384,7 @@ void TestAssistant (void *argument) {
 
       osDelay (10);
 
-      time  = SYSTICK_MSEC(time);
+      time  = SYSTICK_MS(time);
       ticks = GET_SYSTICK();
       i = cnt = 0;
       do {

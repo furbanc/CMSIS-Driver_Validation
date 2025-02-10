@@ -110,7 +110,7 @@ static int32_t ETH_RunTransfer (const uint8_t *out, uint8_t *in, uint32_t len, u
       }
     }
   }
-  while ((GET_SYSTICK() - tick) < SYSTICK_MICROSEC(ETH_TRANSFER_TIMEOUT*1000));
+  while ((GET_SYSTICK() - tick) < SYSTICK_MS(ETH_TRANSFER_TIMEOUT));
 
   return ARM_DRIVER_ERROR_TIMEOUT;
 }
@@ -952,7 +952,7 @@ void ETH_MAC_SignalEvent (void) {
       break;
     }
   }
-  while ((GET_SYSTICK() - tick) < SYSTICK_MICROSEC(ETH_TRANSFER_TIMEOUT*1000));
+  while ((GET_SYSTICK() - tick) < SYSTICK_MS(ETH_TRANSFER_TIMEOUT));
 
   if (!(Event & ARM_ETH_MAC_EVENT_RX_FRAME)) {
     TEST_FAIL_MESSAGE("[FAILED] Interrupt mode not working");
@@ -1339,7 +1339,7 @@ void ETH_Loopback_External (void) {
   /* Check Ethernet link */
   tick = GET_SYSTICK();
   while (eth_phy->GetLinkState() != ARM_ETH_LINK_UP) {
-    if ((GET_SYSTICK() - tick) >= SYSTICK_MICROSEC(ETH_LINK_TIMEOUT*1000)) {
+    if ((GET_SYSTICK() - tick) >= SYSTICK_MS(ETH_LINK_TIMEOUT)) {
       TEST_FAIL_MESSAGE("[FAILED] Link down, connect Ethernet cable");
       goto exit;
     }
@@ -1591,7 +1591,7 @@ void ETH_Loopback_PTP (void) {
   TEST_ASSERT(eth_mac->SendFrame(PTP_frame, PTP_frame_len, ARM_ETH_MAC_TX_FRAME_TIMESTAMP) == ARM_DRIVER_OK);
   tick = GET_SYSTICK();
   while (eth_mac->GetRxFrameSize() == 0) {
-    if ((GET_SYSTICK() - tick) >= SYSTICK_MICROSEC(ETH_TRANSFER_TIMEOUT*1000)) {
+    if ((GET_SYSTICK() - tick) >= SYSTICK_MS(ETH_TRANSFER_TIMEOUT)) {
       TEST_FAIL_MESSAGE("[FAILED] Transfer timeout");
       break;
     }

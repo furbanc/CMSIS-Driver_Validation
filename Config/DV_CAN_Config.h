@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2020 Arm Limited. All rights reserved.
+ * Copyright (c) 2015-2025 Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -17,7 +17,7 @@
  *
  * -----------------------------------------------------------------------------
  *
- * $Revision:   V1.0.0
+ * $Revision:   V1.1.0
  *
  * Project:     CMSIS-Driver Validation
  * Title:       Controller Area Network (CAN) driver validation 
@@ -30,6 +30,7 @@
 #define DV_CAN_CONFIG_H_
 
 //-------- <<< Use Configuration Wizard in Context Menu >>> --------------------
+//------ With VS Code: Open Preview for Configuration Wizard -------------------
 
 // <h> CAN
 // <i> Controller Area Network (CAN) driver validation configuration
@@ -60,8 +61,8 @@
 // <i> Set the minimum margin between measured and expected bitrates (%)
 #define MIN_BITRATE                     10
 // <o> Transfer timeout
-// <i> Set the transfer timeout (us)
-#define CAN_TRANSFER_TIMEOUT            1000000
+// <i> Set the transfer timeout (ms)
+#define CAN_TRANSFER_TIMEOUT            1000
 // <h> Tests
 // <i> Enable / disable tests.
 // <q> CAN_GetCapabilities

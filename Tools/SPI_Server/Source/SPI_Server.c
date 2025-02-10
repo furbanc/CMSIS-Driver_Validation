@@ -159,7 +159,7 @@ int32_t SPI_Server_Start (void) {
   int32_t ret;
 
   vioInit();
-  (void)vioPrint(vioLevelHeading, "SPI Server v%s", SPI_SERVER_VER);
+  printf ("SPI Server v%s\r\n", SPI_SERVER_VER);
 
   // Initialize local variables
   spi_server_state   = SPI_SERVER_STATE_RECEPTION;
@@ -221,7 +221,7 @@ int32_t SPI_Server_Start (void) {
   }
 
   if (ret != EXIT_SUCCESS) {
-    vioPrint(vioLevelError, "Server Start failed!");
+    printf ("Server Start failed!\r\n");
   }
 
   return ret;
@@ -272,7 +272,7 @@ int32_t SPI_Server_Stop (void) {
   }
 
   if (ret != EXIT_SUCCESS) {
-    vioPrint(vioLevelError, "Server Stop failed! ");
+    printf ("Server Stop failed!\r\n");
   }
 
   return ret;
@@ -313,13 +313,13 @@ static void SPI_Server_Thread (void *argument) {
             break;
           }
         }
-        vioPrint(vioLevelMessage, "%.20s                    ", spi_cmd_buf_rx);
+        printf ("%.20s\r\n", spi_cmd_buf_rx);
         spi_server_state = SPI_SERVER_STATE_RECEPTION;
         break;
 
       case SPI_SERVER_STATE_TERMINATE:  // Self-terminate the thread
       default:                          // Should never happen, processed as terminate request
-        vioPrint(vioLevelError, "Server stopped!     ");
+        printf ("Server stopped!\r\n");
         (void)SPI_Com_Abort();
         (void)osThreadTerminate(osThreadGetId());
         break;

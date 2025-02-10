@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 Arm Limited. All rights reserved.
+ * Copyright (c) 2020-2025 Arm Limited. All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -228,7 +228,8 @@ int32_t USART_Server_Start (void) {
   }
 
   vioInit();
-  (void)vioPrint(vioLevelHeading, "USART Server v%s\r\nMode: %s", USART_SERVER_VER, str_mode[mode_disp]);
+  printf ("USART Server v%s\r\n", USART_SERVER_VER);
+  printf ("Mode: %s\r\n", str_mode[mode_disp]);
 
   // Initialize local variables
   usart_server_state   = USART_SERVER_STATE_RECEPTION;
@@ -295,7 +296,7 @@ int32_t USART_Server_Start (void) {
   }
 
   if (ret != EXIT_SUCCESS) {
-    vioPrint(vioLevelError, "Server Start failed!");
+    printf ("Server Start failed!\r\n");
   }
 
   return ret;
@@ -348,7 +349,7 @@ int32_t USART_Server_Stop (void) {
   }
 
   if (ret != EXIT_SUCCESS) {
-    vioPrint(vioLevelError, "Server Stop failed! ");
+    printf ("Server Stop failed!\r\n");
   }
 
   return ret;
@@ -389,13 +390,13 @@ static void USART_Server_Thread (void *argument) {
             break;
           }
         }
-        vioPrint(vioLevelMessage, "%.20s                    ", usart_cmd_buf_rx);
+        printf ("%.20s\r\n", usart_cmd_buf_rx);
         usart_server_state = USART_SERVER_STATE_RECEPTION;
         break;
 
       case USART_SERVER_STATE_TERMINATE:  // Self-terminate the thread
       default:                            // Should never happen, processed as terminate request
-        vioPrint(vioLevelError, "Server stopped!     ");
+        printf ("Server stopped!\r\n");
         (void)USART_Com_Abort();
         (void)osThreadTerminate(osThreadGetId());
         break;
